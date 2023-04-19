@@ -4,14 +4,14 @@ export const ACTIVIDADES =
               id: 0,
               nombre: 'Excursiones y actividades',
               imagen: 'imagenes/40Años.png',
-              destacado: false,
+              destacado: true,
               descripcion: 'Actualmente en Gaztaroa se imparten cursillos a los socios y socias que lo necesitan, se organizan jornadas invernales de iniciación y perfeccionamiento de alpinismo, escalada, orientación, etc. Poco a poco se ha ido creando un grupo muy majo de gente comprometida con el Gaztaroa sin importar no tanto a dónde se va, sino cómo se va. Actualmente en Gaztaroa somos 80 socios y socias con aproximadamente 150 licencias federativas.'
             },
             {
               id: 1,
               nombre: 'Asóciate a Gaztaroa!',
               imagen: 'imagenes/bisaurin.png',
-              destacado: false,
+              destacado: true,
               descripcion: 'Hola Montañera! Hacerte socia del Club de Montaña Gaztaroa es muy fácil. Pásate de 20:00 a 21:00 por las oficinas del Club un jueves de las semanas que hay salida y podrás darnos la información necesaria para hacerte socio. Al hacerte socio del Club, podrás participar activamente en la planificación de cada temporada, podrás consultar nuestra biblioteca de mapas, libros y revistas y tendrás descuento en la tarifa del bus en las actividades en las que lo utilicemos. Anímate!'
             },
             {
