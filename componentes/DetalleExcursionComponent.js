@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { Card } from '@rneui/themed';
+import { Card, Icon } from '@rneui/themed';
 import { EXCURSIONES } from '../comun/excursiones';
+import { COMENTARIOS } from '../comun/comentarios';
+import { FlatList, ScrollView } from 'react-native-gesture-handler';
+import { ListItem } from 'react-native-elements';
 const styles = StyleSheet.create({
     image: {
         width: '100%',
@@ -28,6 +31,7 @@ const styles = StyleSheet.create({
         position: 'relative',
     },
 });
+
 function RenderExcursion(props) {
 
     const excursion = props.excursion;
@@ -45,6 +49,14 @@ function RenderExcursion(props) {
                         {excursion.descripcion}
                     </Text>
                 </View>
+                <Icon
+                    raised
+                    reverse
+                    name={props.favorita ? 'heart' : 'heart-o'}
+                    type='font-awesome'
+                    color='#f50'
+                    onPress={() => props.favorita ? console.log('La excursión ya se encuentra entre las favoritas') : props.onPress()}
+                />
             </Card>
         );
     }
@@ -52,18 +64,67 @@ function RenderExcursion(props) {
         return (<View></View>);
     }
 }
+function RenderComentario(props) {
+    const comentarios = props.comentarios;
+
+    if (comentarios != null) {
+        return (
+            <Card>
+                <Card.Title>Comentarios</Card.Title>
+                <Card.Divider />
+                {comentarios.map((item, index) => {
+                    return (
+                        <>
+                            <Text>{item.autor}</Text>
+                            <Text style={{ margin: 20 }}>
+                                {item.comentario}
+                            </Text>
+                        </>
+                    )
+                }
+                )}
+            </Card>
+        )
+    } else {
+        return (
+            <Text>Problemas</Text>
+        )
+    }
+
+
+}
 
 class DetalleExcursion extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            excursiones: EXCURSIONES
+            excursiones: EXCURSIONES,
+            comentarios: COMENTARIOS,
+            favoritos: []
         };
+    }
+    marcarFavorito(excursionId) {
+        this.setState({ favoritos: this.state.favoritos.concat(excursionId) })
     }
 
     render() {
-        const { excursionId } = this.props.route.params;
-        return (<RenderExcursion excursion={this.state.excursiones[+excursionId]} />);
+        const { excursionId } = this.props.route.params; // ESE RUOTER.PARAMS ES PORQUE EL ID SE LO PASO DESDE CALENDARIO
+     
+        // 
+        return (
+
+            <ScrollView>
+                <RenderExcursion
+                    excursion={this.state.excursiones[+excursionId]}
+                    favorita={this.state.favoritos.some(el => el === excursionId)}
+                    onPress={() => this.marcarFavorito(excursionId)}
+                />
+                <RenderComentario
+                    comentarios={this.state.comentarios.filter((comentario) => comentario.excursionId === excursionId)}
+                />
+            </ScrollView>
+
+        );
     }
 }
 
