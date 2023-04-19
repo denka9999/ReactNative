@@ -32,6 +32,7 @@ const styles = StyleSheet.create({
     },
 });
 
+
 function RenderExcursion(props) {
 
     const excursion = props.excursion;
@@ -49,6 +50,14 @@ function RenderExcursion(props) {
                         {excursion.descripcion}
                     </Text>
                 </View>
+                <Icon
+                    raised
+                    reverse
+                    name={props.favorita ? 'heart' : 'heart-o'}
+                    type='font-awesome'
+                    color='#f50'
+                    onPress={() => props.favorita ? console.log('La excursión ya se encuentra entre las favoritas') : props.onPress()}
+                />
                 <Icon
                     raised
                     reverse
@@ -102,6 +111,7 @@ class DetalleExcursion extends Component {
             excursiones: EXCURSIONES,
             comentarios: COMENTARIOS,
             favoritos: []
+
         };
     }
     marcarFavorito(excursionId) {
