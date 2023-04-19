@@ -5,6 +5,7 @@ import { EXCURSIONES } from '../comun/excursiones';
 import { COMENTARIOS } from '../comun/comentarios';
 import { FlatList, ScrollView } from 'react-native-gesture-handler';
 import { ListItem } from 'react-native-elements';
+import { baseUrl } from '../comun/comun';
 const styles = StyleSheet.create({
     image: {
         width: '100%',
@@ -12,7 +13,7 @@ const styles = StyleSheet.create({
         resizeMode: 'cover',
     },
     title: {
-        color: 'chocolate',
+        color: 'white',
         padding: 10,
         fontSize: 20,
         position: 'absolute',
@@ -42,7 +43,7 @@ function RenderExcursion(props) {
             <Card containerStyle={styles.card} >
                 <View style={styles.imageContainer}>
                     <Card.Image
-                        source={require('./imagenes/40Años.png')}
+                        source={{uri:baseUrl + excursion.imagen}}
                         style={styles.image}
                     ></Card.Image>
                     <Text style={styles.title}>{excursion.nombre}</Text>

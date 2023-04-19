@@ -6,6 +6,7 @@ import { ScrollView } from 'react-native';
 import { Text, View } from 'react-native';
 import { CABECERAS } from '../comun/cabeceras';
 import { ACTIVIDADES } from '../comun/actividades';
+import { baseUrl } from '../comun/comun';
 
 
 
@@ -51,7 +52,7 @@ class QuienesSomos extends Component {
                     <ListItem
                         key={index}
                         bottomDivider>
-                        <Avatar source={require('./imagenes/40Años.png')} />
+                        <Avatar source={{uri:baseUrl + item.imagen}} />
                         <ListItem.Content>
                             <ListItem.Title>{item.nombre}</ListItem.Title>
                             <ListItem.Subtitle>{item.descripcion}</ListItem.Subtitle>

@@ -13,6 +13,7 @@ import { Icon } from '@rneui/themed';
 import { SafeAreaView } from 'react-native';
 import { Image, Text } from 'react-native-elements';
 // import { NavigationContainer, DrawerActions } from '@react-navigation/native';
+import { colorGaztaroaClaro,colorGaztaroaOscuro } from '../comun/comun';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -24,8 +25,8 @@ function HomeNavegador({ navigation }) {
       screenOptions={{
         headerMode: 'screen',
         headerTintColor: '#fff',
-        headerStyle: { backgroundColor: '#015afc' },
-        headerTitleStyle: { color: '#fff' },
+        headerStyle: { backgroundColor: colorGaztaroaOscuro },
+        headerTitleStyle: { color: '#fff',alignItems: 'center' },
         headerLeft: () => (<Icon name="menu" size={28} color='white' onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())} />),
       }}
 
@@ -51,7 +52,7 @@ function CalendarioNavegador({ navigation }) {
       headerMode="float"
       screenOptions={{
         headerTintColor: '#fff',
-        headerStyle: { backgroundColor: '#015afc' },
+        headerStyle: { backgroundColor: colorGaztaroaOscuro },
         headerTitleStyle: { color: '#fff' },
       }}
     >
@@ -84,7 +85,7 @@ function ContactoFuncion({ navigation }) {
       headerMode="float"
       screenOptions={{
         headerTintColor: '#aba',
-        headerStyle: { backgroundColor: '#015afc' },
+        headerStyle: { backgroundColor: colorGaztaroaOscuro },
         headerTitleStyle: { color: '#fff' },
         headerLeft: () => (<Icon name="menu" size={28} color='white' onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())} />)
       }}
@@ -106,7 +107,7 @@ function QuienesSomosFuncion({ navigation }) {
       headerMode="screen"
       screenOptions={{
         headerTintColor: '#fff',
-        headerStyle: { backgroundColor: '#015afc' },
+        headerStyle: { backgroundColor: colorGaztaroaOscuro  },
         headerTitleStyle: { color: '#fff' },
         headerLeft: () => (<Icon name="menu" size={28} color='white' onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())} />)
 
@@ -149,7 +150,7 @@ function DrawerNavegador() {
       screenOptions={{
         headerShown: false,
         drawerStyle: {
-          backgroundColor: '#c2d3da',
+          backgroundColor: colorGaztaroaClaro,
         },
       }}
     >
@@ -216,7 +217,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   drawerHeader: {
-    backgroundColor: '#015afc',
+    backgroundColor: colorGaztaroaOscuro,
     height: 100,
     alignItems: 'center',
     justifyContent: 'center',
