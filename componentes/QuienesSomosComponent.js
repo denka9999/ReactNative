@@ -5,15 +5,22 @@ import { Card } from '@rneui/base';
 import { ScrollView } from 'react-native';
 import { Text, View } from 'react-native';
 import { CABECERAS } from '../comun/cabeceras';
-import { ACTIVIDADES } from '../comun/actividades';
+// import { ACTIVIDADES } from '../comun/actividades';
 import { baseUrl } from '../comun/comun';
+import { connect } from 'react-redux';
 
+
+const mapStateToProps = state => {
+    return {
+        actividades: state.actividades
+    }
+}
 
 
 function Historia() {
     return (
         <Card>
-            <Card.Title>Un poquito de histoia</Card.Title>
+            <Card.Title>Un poquito de historia</Card.Title>
             <Card.Divider />
             <Text style={{ margin: 20 }}>
                 El nacimiento del club de montaña Gaztaroa se remonta a la
@@ -37,12 +44,12 @@ function Historia() {
 }
 class QuienesSomos extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            actividades: ACTIVIDADES
-        };
-    }
+    // constructor(props) {
+    //     super(props);
+    //     this.state = {
+    //         actividades: ACTIVIDADES
+    //     };
+    // }
 
     render() {
         const { navigate } = this.props.navigation;
@@ -52,7 +59,7 @@ class QuienesSomos extends Component {
                     <ListItem
                         key={index}
                         bottomDivider>
-                        <Avatar source={{uri:baseUrl + item.imagen}} />
+                        <Avatar source={{ uri: baseUrl + item.imagen }} />
                         <ListItem.Content>
                             <ListItem.Title>{item.nombre}</ListItem.Title>
                             <ListItem.Subtitle>{item.descripcion}</ListItem.Subtitle>
@@ -62,17 +69,18 @@ class QuienesSomos extends Component {
             );
         };
         return (
-            <ScrollView>
+             <ScrollView>
                 <SafeAreaView>
                     <Historia />
                     <FlatList
-                        data={this.state.actividades}
+                        data={this.props.actividades.actividades}
                         renderItem={misActividades}
                         keyExtractor={item => item.id.toString()}
                     />
                 </SafeAreaView>
-            </ScrollView>
+             </ScrollView> 
         );
     }
 }
-export default QuienesSomos;
+// export default QuienesSomos;
+export default connect(mapStateToProps)(QuienesSomos);

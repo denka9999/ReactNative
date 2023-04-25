@@ -13,7 +13,37 @@ import { Icon } from '@rneui/themed';
 import { SafeAreaView } from 'react-native';
 import { Image, Text } from 'react-native-elements';
 // import { NavigationContainer, DrawerActions } from '@react-navigation/native';
-import { colorGaztaroaClaro,colorGaztaroaOscuro } from '../comun/comun';
+import { colorGaztaroaClaro, colorGaztaroaOscuro } from '../comun/comun';
+import { connect } from 'react-redux';
+import { fetchExcursiones, fetchComentarios, fetchCabeceras, fetchActividades } from '../redux/ActionCreators'
+
+
+
+// lo que hacemos aqui es acceder al estado actual de la store, es una funcion de redux
+//devuelve el valor del estado
+
+const mapStateToProps = state => {
+  return {
+    excursiones: state.excursiones,
+    comentarios: state.comentarios,
+    cabeceras: state.cabeceras,
+    actividades: state.actividades
+  }
+}
+
+// lo que hace esta funcion es conectar las acciones con las props de cada objeto
+//cada una de las 4 funciiones llama a una funcion especifica
+
+const mapDispatchToProps = dispatch => ({
+  fetchExcursiones: () => dispatch(fetchExcursiones()),
+  fetchComentarios: () => dispatch(fetchComentarios()),
+  fetchCabeceras: () => dispatch(fetchCabeceras()),
+  fetchActividades: () => dispatch(fetchActividades()),
+})
+
+
+// EN RESUMEN DE LAS DOS CONST DE ARRIIBA, OBTENEMOS EL ESTADO DE LA STORE 
+// OBTENEMOS LAS ACCIONES
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -26,7 +56,7 @@ function HomeNavegador({ navigation }) {
         headerMode: 'screen',
         headerTintColor: '#fff',
         headerStyle: { backgroundColor: colorGaztaroaOscuro },
-        headerTitleStyle: { color: '#fff',alignItems: 'center' },
+        headerTitleStyle: { color: '#fff', alignItems: 'center' },
         headerLeft: () => (<Icon name="menu" size={28} color='white' onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())} />),
       }}
 
@@ -61,7 +91,7 @@ function CalendarioNavegador({ navigation }) {
         component={Calendario}
         options={{
           title: 'Calendario Gaztaroa',
-        headerLeft: () => (<Icon name="menu" size={28} color='white' onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())} />)
+          headerLeft: () => (<Icon name="menu" size={28} color='white' onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())} />)
 
         }}
       />
@@ -107,7 +137,7 @@ function QuienesSomosFuncion({ navigation }) {
       headerMode="screen"
       screenOptions={{
         headerTintColor: '#fff',
-        headerStyle: { backgroundColor: colorGaztaroaOscuro  },
+        headerStyle: { backgroundColor: colorGaztaroaOscuro },
         headerTitleStyle: { color: '#fff' },
         headerLeft: () => (<Icon name="menu" size={28} color='white' onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())} />)
 
@@ -236,17 +266,24 @@ const styles = StyleSheet.create({
   }
 });
 class Campobase extends Component {
-  render() {
-    return (
-      <NavigationContainer>
-        <View style={{ flex: 1, paddingTop: Platform.OS === 'ios' ? 0 : Constants.statusBarHeight }}>
-          <DrawerNavegador />
-        </View>
-      </NavigationContainer>
-    );
+  componentDidMount() {
+    this.props.fetchExcursiones();
+    this.props.fetchComentarios();
+    this.props.fetchCabeceras();
+    this.props.fetchActividades();
   }
-}
+    render() {
+      return (
+        <NavigationContainer>
+          <View style={{ flex: 1, paddingTop: Platform.OS === 'ios' ? 0 : Constants.statusBarHeight }}>
+            <DrawerNavegador />
+          </View>
+        </NavigationContainer>
+      );
+    }
+  }
 
 
 
-export default Campobase;
+// export default Campobase;
+export default connect(mapStateToProps,mapDispatchToProps)(Campobase);

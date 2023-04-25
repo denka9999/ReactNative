@@ -1,7 +1,16 @@
 import React from "react";
 import { Card } from '@rneui/themed';
 import { Text, ScrollView, View } from 'react-native';
+import { connect } from 'react-redux';
 
+// lo importo pero en este caso en el contaccto no lo utilizo
+const mapStateToProps = state => {
+    return {
+        actividades: state.actividades,
+        excursiones: state.excursiones,
+        cabeceras: state.cabeceras
+    }
+}
 
 const Contacto = () => {
     return (
@@ -35,5 +44,5 @@ const Contacto = () => {
         </Card>
     )
 };
-export default Contacto;
+export default connect(mapStateToProps)(Contacto);;
 
