@@ -287,3 +287,4 @@ class Campobase extends Component {
 
 // export default Campobase;
 export default connect(mapStateToProps,mapDispatchToProps)(Campobase);
+//

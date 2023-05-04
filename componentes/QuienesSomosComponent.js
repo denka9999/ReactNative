@@ -8,6 +8,7 @@ import { CABECERAS } from '../comun/cabeceras';
 // import { ACTIVIDADES } from '../comun/actividades';
 import { baseUrl } from '../comun/comun';
 import { connect } from 'react-redux';
+import { IndicadorActividad } from './IndicadorActividadComponent';
 
 
 const mapStateToProps = state => {
@@ -54,31 +55,59 @@ class QuienesSomos extends Component {
     render() {
         const { navigate } = this.props.navigation;
         const misActividades = ({ item, index }) => {
-            return (
-                <Card>
-                    <ListItem
-                        key={index}
-                        bottomDivider>
-                        <Avatar source={{ uri: baseUrl + item.imagen }} />
-                        <ListItem.Content>
-                            <ListItem.Title>{item.nombre}</ListItem.Title>
-                            <ListItem.Subtitle>{item.descripcion}</ListItem.Subtitle>
-                        </ListItem.Content>
-                    </ListItem>
-                </Card>
-            );
+
+            if (this.props.errMess) {
+                console.log({errMess});
+                return (
+                    <ScrollView>
+                        <Historia/>
+                        <Text>{this.props.errMess}</Text>
+                    </ScrollView>
+
+                );
+            }
+            if (this.props.isLoading) {
+                return (
+                    <ScrollView>
+                        <Historia />
+                        <Card>
+                            <Card.Title>"Actividades y recursos"</Card.Title>
+                            <Card.Divider />
+                            <IndicadorActividad />
+                        </Card>
+                    </ScrollView>
+                );
+            }
+            else {
+                return (
+                    <ScrollView>
+                        <Historia />
+                        <Card>
+                            <ListItem
+                                key={index}
+                                bottomDivider>
+                                <Avatar source={{ uri: baseUrl + item.imagen }} />
+                                <ListItem.Content>
+                                    <ListItem.Title>{item.nombre}</ListItem.Title>
+                                    <ListItem.Subtitle>{item.descripcion}</ListItem.Subtitle>
+                                </ListItem.Content>
+                            </ListItem>
+                        </Card>
+                    </ScrollView>
+                );
+            }
         };
         return (
-             <ScrollView>
-                <SafeAreaView>
-                    <Historia />
-                    <FlatList
-                        data={this.props.actividades.actividades}
-                        renderItem={misActividades}
-                        keyExtractor={item => item.id.toString()}
-                    />
-                </SafeAreaView>
-             </ScrollView> 
+            <SafeAreaView>
+
+                <FlatList
+                    data={this.props.actividades.actividades}
+                    renderItem={misActividades}
+                    keyExtractor={item => item.id.toString()}
+                    errMess={this.props.actividades.errMess}
+                    isLoading={this.props.actividades.isLoading}
+                />
+            </SafeAreaView>
         );
     }
 }

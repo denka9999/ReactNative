@@ -7,6 +7,7 @@ import { Card } from '@rneui/themed';
 import { baseUrl } from '../comun/comun';
 import { colorGaztaroaClaro,colorGaztaroaOscuro} from '../comun/comun';
 import { connect } from 'react-redux';
+import { IndicadorActividad } from './IndicadorActividadComponent';
 
 const mapStateToProps = state => {
     return {
@@ -47,6 +48,20 @@ function RenderItem(props) {
 
     const item = props.item;
 
+    if(props.isLoading){
+        return(
+            <IndicadorActividad />
+        );
+    }
+    
+    else if(props.errMess){
+        return(
+            <View>
+                <Text>{props.errMess}</Text>
+            </View>
+        );
+    }
+
     if (item != null) {
         return (
             <Card containerStyle={styles.card} >
@@ -84,7 +99,10 @@ class Home extends Component {
         return (
             <ScrollView>
                 <RenderItem item={this.props.cabeceras.cabeceras.filter((cabecera) => cabecera.destacado)[0]} />
-                <RenderItem item={this.props.excursiones.excursiones.filter((excursion) => excursion.destacado)[0]} />
+                <RenderItem item={this.props.excursiones.excursiones.filter((excursion) => excursion.destacado)[0]} 
+                    isLoading={this.props.excursiones.isLoading}
+                    errMess={this.props.excursiones.errMess}
+                    />
                 {/* ese cero al final lo que hace es coger el primer elemento que este a true, si fuese 1, cogeria el segundo con true */}
                 <RenderItem item={this.props.actividades.actividades.filter((actividad) => actividad.destacado)[0]} />
             </ScrollView>
