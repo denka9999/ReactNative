@@ -158,3 +158,24 @@ export const addFavorito = (excursionId) => ({
     type: ActionTypes.ADD_FAVORITO,
     payload: excursionId
 });
+// esto tengo que añadir
+export const postComentario = (excursionId, valoracion, autor, comentario) => (dispatch) => {
+    let dia = new Date().toString();
+    setTimeout(() => {
+        dispatch(addComentario(excursionId, valoracion, autor, comentario, dia));
+    }, 2000);
+};
+
+export const addComentario = (excursionId, valoracion, autor, comentario, dia) => ({
+    type: ActionTypes.ADD_COMENTARIO,
+    payload: {
+        id: 30,
+        excursionId: excursionId,
+        valoracion: valoracion,
+        comentario: comentario,
+        autor: autor,
+        dia: dia
+    },
+});
+
+// esto tengo que añadir
