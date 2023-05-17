@@ -19,6 +19,8 @@ import { fetchExcursiones, fetchComentarios, fetchCabeceras, fetchActividades } 
 
 
 
+
+
 // lo que hacemos aqui es acceder al estado actual de la store, es una funcion de redux
 //devuelve el valor del estado
 
