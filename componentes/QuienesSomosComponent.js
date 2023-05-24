@@ -18,7 +18,7 @@ const mapStateToProps = state => {
 }
 
 
-function Historia() {
+function Historia(props) {
     return (
         <Card>
             <Card.Title>Un poquito de historia</Card.Title>
@@ -45,19 +45,14 @@ function Historia() {
 }
 class QuienesSomos extends Component {
 
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {
-    //         actividades: ACTIVIDADES
-    //     };
-    // }
-
+    
     render() {
+    console.log(this.props.actividades);
+
         const { navigate } = this.props.navigation;
         const misActividades = ({ item, index }) => {
 
             if (this.props.errMess) {
-                console.log({errMess});
                 return (
                     <ScrollView>
                         <Historia/>
@@ -86,7 +81,7 @@ class QuienesSomos extends Component {
                             <ListItem
                                 key={index}
                                 bottomDivider>
-                                <Avatar source={{ uri: baseUrl + item.imagen }} />
+                                <Avatar source={{ uri: item.imagen }} />
                                 <ListItem.Content>
                                     <ListItem.Title>{item.nombre}</ListItem.Title>
                                     <ListItem.Subtitle>{item.descripcion}</ListItem.Subtitle>

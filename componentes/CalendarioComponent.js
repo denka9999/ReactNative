@@ -10,20 +10,18 @@ import { View } from 'react-native';
 
 
 const mapStateToProps = state => {
+    
     return {
         excursiones: state.excursiones
+        
     }
 }
 
 class Calendario extends Component {
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {
-    //         excursiones: EXCURSIONES
-    //     };
-    // }
-
     render() {
+    console.log(this.props.excursiones);
+    // console.log(this.props.excursiones);
+
 
         const { navigate } = this.props.navigation;
 
@@ -46,7 +44,7 @@ class Calendario extends Component {
                         key={index}
                         onPress={() => navigate('DetalleExcursion', { excursionId: item.id })}
                         bottomDivider>
-                        <Avatar source={{ uri: baseUrl + item.imagen }} />
+                        <Avatar source={{ uri:item.imagen }} />
                         <ListItem.Content>
                             <ListItem.Title>{item.nombre}</ListItem.Title>
                             <ListItem.Subtitle>{item.descripcion}</ListItem.Subtitle>

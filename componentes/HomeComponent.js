@@ -47,6 +47,7 @@ const styles = StyleSheet.create({
 function RenderItem(props) {
 
     const item = props.item;
+    console.log(item)
 
     if(props.isLoading){
         return(
@@ -67,7 +68,7 @@ function RenderItem(props) {
             <Card containerStyle={styles.card} >
                 <View style={styles.imageContainer}>
                   <Card.Image
-                    source={{uri:baseUrl + item.imagen}}
+                    source={{uri: item.imagen}}
                     style={styles.image}
                   ></Card.Image>
                   <Text style={styles.title}>{item.nombre}</Text>
@@ -85,14 +86,7 @@ function RenderItem(props) {
 
 class Home extends Component {
 
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {
-    //         excursiones: EXCURSIONES,
-    //         cabeceras: CABECERAS,
-    //         actividades: ACTIVIDADES
-    //     };
-    // }
+
 
     render() {
 
