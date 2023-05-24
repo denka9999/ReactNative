@@ -19,7 +19,7 @@ import { fetchExcursiones, fetchComentarios, fetchCabeceras, fetchActividades } 
 import Login from './Login';
 import Registro from './Registro';
 import Herramientas from './Herramientas';
-
+import Ubicacion from './Ubicacion';
 
 
 
@@ -229,6 +229,29 @@ function HerramientasNavegador({ navigation }) {
     </Stack.Navigator>
   );
 }
+function UbicacionNavegador({ navigation }) {
+  return (
+    <Stack.Navigator
+      initialRouteName="Herramientas"
+      screenOptions={{
+        headerMode: 'screen',
+        headerTintColor: '#fff',
+        headerStyle: { backgroundColor: colorGaztaroaOscuro },
+        headerTitleStyle: { color: '#fff' },
+        headerLeft: () => (<Icon name="menu" size={28} color='white' onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())} />),
+
+      }}
+    >
+      <Stack.Screen
+        name="Ubicacion"
+        component={Ubicacion}
+        options={{
+          title: 'Ubicacion',
+        }}
+      />
+    </Stack.Navigator>
+  );
+}
 
 
 function CustomDrawerContent(props) {
@@ -349,8 +372,21 @@ function DrawerNavegador() {
           )
         }}
       />
+        <Drawer.Screen name="Ubicacion" component={UbicacionNavegador}
+        options={{
+          drawerIcon: ({ tintColor }) => (
+            <Icon
+              name='paper-plane'
+              type='font-awesome'
+              size={24}
+              color={tintColor}
+            />
+          )
+        }}
+      />
 
     </Drawer.Navigator>
+    
     // ese CalendarioNavegador, es la segunda paginad el menu de la izquierda, lo que define este Drawer.Screen es la pagina que vamos a tener
   );
 }

@@ -3,7 +3,7 @@ import { Text, ScrollView, View } from 'react-native';
 import { Card, Icon } from 'react-native-elements';
 import NetInfo from '@react-native-community/netinfo';
 import MapView, { Marker } from 'react-native-maps';
-import { StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 import * as Location from 'expo-location';
 
 
@@ -12,10 +12,15 @@ function Compruebaconexion() {
         const connectionInfo = await NetInfo.fetch();
         // console.log(connectionInfo);
         console.log(connectionInfo.details.cellularGeneration);
-        const message = `Tipo de conexión: ${connectionInfo.type}\n  Red: ${connectionInfo.details.carrier}\n  Conexion: ${connectionInfo.details.cellularGeneration}`;
+        if (connectionInfo.type == "wifi") {
+            const message = `Tipo de conexión : ${connectionInfo.type}`;
+            alert('Informacion de conexion :' + '\n' + message);
+        } else {
+            const message = `Tipo de conexión: ${connectionInfo.type}\n  Red: ${connectionInfo.details.carrier}\n  Conexion: ${connectionInfo.details.cellularGeneration}`;
 
 
-        alert('Información de conexión :' + '\n' + message);
+            alert('Información de conexión :' + '\n' + message);
+        }
     };
     return (
         <Icon
@@ -29,49 +34,6 @@ function Compruebaconexion() {
     )
 }
 
-// function MapsComponent() {
-
-//     const [location, setLocation] = useState(null);
-//     const [errorMsg, setErrorMsg] = useState(null);
-
-//     (async () => {
-
-//         let { status } = await Location.requestForegroundPermissionsAsync();
-//         if (status !== 'granted') {
-//             setErrorMsg('Permission to access location was denied');
-//             return;
-//         }
-
-//         let location = await Location.getCurrentPositionAsync({});
-//         console.log("esta es la loc" + location.coords.longitude)
-//         setLocation(location);
-//     })();
-
-//     let text = 'Waiting..';
-//     if (errorMsg) {
-//         text = errorMsg;
-//     } else if (location) {
-//         text = JSON.stringify(location);
-//         const region = {
-//             latitude: location.coords.latitude,
-//             longitude: location.coordslongitude,
-//         };
-//     }
-
-//     const region = region;
-
-//     return (
-//         <View style={styles.container}>
-//             <MapView
-//                 style={styles.map}
-//                 region={region}
-//                 showsUserLocation={true}
-//                 followUserLocation={true}
-//             >
-//             </MapView>
-//         </View>
-//     );
-// }
 
 const styles = StyleSheet.create({
     container: {
@@ -92,29 +54,21 @@ class Herramientas extends Component {
         return (
             <ScrollView>
                 <Card>
-                    <Card.Title>Contacto</Card.Title>
+                    <Card.Title>Herramientas</Card.Title>
                     <Card.Divider />
 
                     <Text style={{ margin: 20 }}>
-                        Kaixo Mendizale!
+                        Hola buenas, de momento esta es una pequeña pagina de pruebas donde nosotros
+                        vamos a ir colocando nuestras Herramientas.
 
-                        Si quieres participar en las salidas de montaña que organizamos o
-                        quieres hacerte soci@ de Gaztaroa, puedes contactar con nosotros a
-                        través de diferentes medios. Puedes llamarnos por teléfono los jueves
-                        de las semanas que hay salida (de 20:00 a 21:00). También puedes
-                        ponerte en contacto con nosotros escribiendo un correo electrónico, o
-                        utilizando la aplicación de esta página web. Y además puedes
-                        seguirnos en Facebook.
+                        De momento la primera sera la de colocar un pequeño icono con una herramienta que nos dira el tipo de conexion
+                        de la que disponemos.
 
-                        Para lo que quieras, estamos a tu disposición!
+                        Lo interesante de esto es acceder a expo con los datos moviles, ya que de este modo nos dice la compañia y el tipo de red
+                        a la cual estamos conectados.
 
                     </Text>
-                    <Text style={{ margin: 20 }}>
-                        Tel: +34 948 277151
-                    </Text>
-                    <Text style={{ margin: 20 }}>
-                        Email: gaztaroa@gaztaroa.com
-                    </Text>
+
                     <Compruebaconexion />
                     {/* <MapsComponent/> */}
 
