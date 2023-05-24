@@ -178,4 +178,15 @@ export const addComentario = (excursionId, valoracion, autor, comentario, dia) =
     },
 });
 
-// esto tengo que añadir
+// añadimos ahora los action creators para login y registro
+export const iniciarSesion = (user) => (
+    {
+        type: ActionTypes.INICIAR_SESION,
+        payload: user
+    }
+
+);
+export const cerrarSesion = () => ({
+    type: ActionTypes.CERRAR_SESION
+}
+);

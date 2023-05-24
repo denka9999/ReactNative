@@ -5,6 +5,7 @@ import { comentarios } from './comentarios';
 import { cabeceras } from './cabeceras';
 import { actividades } from './actividades';
 import { favoritos } from './favoritos';
+import { sesion } from './sesion';
 
 // esta funcion contiene los reducers, que son los que devuelve un estado que refleja los cambios
 
@@ -15,7 +16,9 @@ export const ConfigureStore = () => {
             comentarios: comentarios,
             cabeceras: cabeceras,
             actividades: actividades,
-            favoritos:favoritos
+            favoritos:favoritos,
+            sesion:sesion
+            
         },
         middleware: [thunk],
     });

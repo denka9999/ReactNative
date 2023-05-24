@@ -16,6 +16,10 @@ import { Image, Text } from 'react-native-elements';
 import { colorGaztaroaClaro, colorGaztaroaOscuro } from '../comun/comun';
 import { connect } from 'react-redux';
 import { fetchExcursiones, fetchComentarios, fetchCabeceras, fetchActividades } from '../redux/ActionCreators'
+import Login from './Login';
+import Registro from './Registro';
+import Herramientas from './Herramientas';
+
 
 
 
@@ -156,6 +160,77 @@ function QuienesSomosFuncion({ navigation }) {
   );
 }
 
+function LoginNavegador({ navigation }) {
+  return (
+    <Stack.Navigator
+      initialRouteName="Login"
+      screenOptions={{
+        headerMode: 'screen',
+        headerTintColor: '#fff',
+        headerStyle: { backgroundColor: colorGaztaroaOscuro },
+        headerTitleStyle: { color: '#fff' },
+        headerLeft: () => (<Icon name="menu" size={28} color='white' onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())} />),
+
+      }}
+    >
+      <Stack.Screen
+        name="Login"
+        component={Login}
+        options={{
+          title: 'Login',
+        }}
+      />
+    </Stack.Navigator>
+  );
+}
+function RegistroNavegador({ navigation }) {
+  return (
+    <Stack.Navigator
+      initialRouteName="Registro"
+      screenOptions={{
+        headerMode: 'screen',
+        headerTintColor: '#fff',
+        headerStyle: { backgroundColor: colorGaztaroaOscuro },
+        headerTitleStyle: { color: '#fff' },
+        headerLeft: () => (<Icon name="menu" size={28} color='white' onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())} />),
+
+      }}
+    >
+      <Stack.Screen
+        name="Registro"
+        component={Registro}
+        options={{
+          title: 'Registro',
+        }}
+      />
+    </Stack.Navigator>
+  );
+}
+function HerramientasNavegador({ navigation }) {
+  return (
+    <Stack.Navigator
+      initialRouteName="Herramientas"
+      screenOptions={{
+        headerMode: 'screen',
+        headerTintColor: '#fff',
+        headerStyle: { backgroundColor: colorGaztaroaOscuro },
+        headerTitleStyle: { color: '#fff' },
+        headerLeft: () => (<Icon name="menu" size={28} color='white' onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())} />),
+
+      }}
+    >
+      <Stack.Screen
+        name="Herramientas"
+        component={Herramientas}
+        options={{
+          title: 'Herramientas',
+        }}
+      />
+    </Stack.Navigator>
+  );
+}
+
+
 function CustomDrawerContent(props) {
   return (
     <DrawerContentScrollView {...props}>
@@ -238,7 +313,42 @@ function DrawerNavegador() {
         }
         }
       />
-
+      <Drawer.Screen name="Login" component={LoginNavegador}
+        options={{
+          drawerIcon: ({ tintColor }) => (
+            <Icon
+              name='address-card'
+              type='font-awesome'
+              size={24}
+              color={tintColor}
+            />
+          )
+        }}
+      />
+      <Drawer.Screen name="Registro" component={RegistroNavegador}
+        options={{
+          drawerIcon: ({ tintColor }) => (
+            <Icon
+              name='user-plus'
+              type='font-awesome'
+              size={24}
+              color={tintColor}
+            />
+          )
+        }}
+      />
+      <Drawer.Screen name="Herramientas" component={HerramientasNavegador}
+        options={{
+          drawerIcon: ({ tintColor }) => (
+            <Icon
+              name='wrench'
+              type='font-awesome'
+              size={24}
+              color={tintColor}
+            />
+          )
+        }}
+      />
 
     </Drawer.Navigator>
     // ese CalendarioNavegador, es la segunda paginad el menu de la izquierda, lo que define este Drawer.Screen es la pagina que vamos a tener
@@ -274,19 +384,19 @@ class Campobase extends Component {
     this.props.fetchCabeceras();
     this.props.fetchActividades();
   }
-    render() {
-      return (
-        <NavigationContainer>
-          <View style={{ flex: 1, paddingTop: Platform.OS === 'ios' ? 0 : Constants.statusBarHeight }}>
-            <DrawerNavegador />
-          </View>
-        </NavigationContainer>
-      );
-    }
+  render() {
+    return (
+      <NavigationContainer>
+        <View style={{ flex: 1, paddingTop: Platform.OS === 'ios' ? 0 : Constants.statusBarHeight }}>
+          <DrawerNavegador />
+        </View>
+      </NavigationContainer>
+    );
   }
+}
 
 
 
 // export default Campobase;
-export default connect(mapStateToProps,mapDispatchToProps)(Campobase);
+export default connect(mapStateToProps, mapDispatchToProps)(Campobase);
 //
