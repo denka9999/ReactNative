@@ -40,3 +40,4 @@ export const comentarios = (state = { errMess: null, comentarios: [] }, action) 
 
   }
 };
+// creo que esta ya todo
