@@ -18,7 +18,7 @@ export default function Ubicacion() {
         }
 
         let location = await Location.getCurrentPositionAsync({});
-        console.log("esta es la loc" + location.coords.longitude)
+        // console.log("esta es la loc" + location.coords.longitude)
         setLocation(location);
     })();
 
