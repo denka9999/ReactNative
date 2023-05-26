@@ -19,7 +19,7 @@ const mapStateToProps = state => {
 
 class Calendario extends Component {
     render() {
-    console.log(this.props.excursiones);
+    // console.log(this.props.excursiones);r
     // console.log(this.props.excursiones);
 
 

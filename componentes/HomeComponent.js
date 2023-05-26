@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
 function RenderItem(props) {
 
     const item = props.item;
-    console.log(item)
+    // console.log(item)
 
     if(props.isLoading){
         return(

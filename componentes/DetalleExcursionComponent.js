@@ -108,7 +108,7 @@ function RenderComentario(props) {
             <Card>
                 <Card.Title>Comentarios</Card.Title>
                 <Card.Divider />
-                {comentarios.map((item, index) => {
+                {comentarios.map((item,index) => {
                     return (
                         <>
                             <Text style={{ margin: 20 }}>Autor: {item.autor}</Text>
